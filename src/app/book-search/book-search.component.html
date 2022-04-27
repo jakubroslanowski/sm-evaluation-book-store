@@ -2,7 +2,31 @@
   <div class="col-md text-center">
     <h1>Book Search</h1>
     <mdb-form-control>
-      <input mdbInput type="text" id="searchInput" class="form-control" />
+      <input [(ngModel)]="searchTerm" mdbInput type="text" id="searchInput" class="form-control"/>
     </mdb-form-control>
+    <button (click)="getBooks()" type="button" class="btn btn-primary mt-3">SEARCH</button>
+    <div *ngIf="books.length">
+      <span class="badge bg-primary">{{books.length}}</span>
+    </div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Cover</th>
+        <th scope="col">Author</th>
+        <th scope="col">Publish year</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let book of books; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{book.title}}</td>
+        <td><img alt="cover" src="{{buildImgSrc(book.coverId)}}"></td>
+        <td>{{listElements(book.authors)}}</td>
+        <td>{{listElements(book.publishYears)}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
